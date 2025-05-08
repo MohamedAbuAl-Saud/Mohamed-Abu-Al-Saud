@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Muhammad Abu Al-Saud | Cybersecurity Expert</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --primary: #0a0f1f;
+      --secondary: #12c2e9;
+      --accent: #c471ed;
+      --text: #e5e7eb;
+      --bg: #0f172a;
+      --bg-alt: #1e293b;
+      --border-color: rgba(255,255,255,0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    .animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(45deg, #0a0f1f, #0f172a);
+      animation: bg-pulse 20s infinite;
+    }
+
+    @keyframes bg-pulse {
+      0% { opacity: 0.8; }
+      50% { opacity: 0.6; }
+      100% { opacity: 0.8; }
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 0.8rem 5%;
+      backdrop-filter: blur(15px);
+      background: rgba(15,23,42,0.85);
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .nav-link {
+      color: var(--text);
+      padding: 0.6rem 1.2rem;
+      border-radius: 30px;
+      transition: 0.3s;
+      font-size: 1rem;
+      text-decoration: none;
+    }
+
+    .nav-link:hover {
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      box-shadow: 0 0 10px rgba(18,194,233,0.3);
+    }
+
+    header {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      text-align: center;
+    }
+
+    .profile-container {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 1rem 0;
+      border: 2px solid var(--secondary);
+      box-shadow: 0 0 20px rgba(18,194,233,0.2);
+      transition: 0.3s;
+    }
+
+    .profile-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(20%) contrast(110%);
+    }
+
+    .holographic-title {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin: 1rem 0;
+      text-shadow: 0 0 5px rgba(18,194,233,0.3);
+    }
+
+    .contact-icons {
+      display: flex;
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .contact-icon {
+      font-size: 1.8rem;
+      color: var(--text);
+      transition: 0.3s;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    section {
+      padding: 4rem 5%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .card {
+      background: var(--bg-alt);
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+      margin: 1rem 0;
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-color);
+    }
+
+    .hack-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .hack-item {
+      padding: 1.5rem;
+      border: 1px solid var(--secondary);
+      border-radius: 10px;
+      text-align: center;
+      transition: 0.3s;
+    }
+
+    .hack-item:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 15px var(--secondary);
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      background: var(--bg-alt);
+      border-top: 1px solid var(--border-color);
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        padding: 0.5rem;
+        gap: 1rem;
+      }
+      
+      .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+      }
+      
+      .holographic-title {
+        font-size: 2rem;
+      }
+      
+      .profile-container {
+        width: 150px;
+        height: 150px;
+      }
+      
+      section {
+        padding: 2rem 5%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="animated-bg"></div>
+
+  <nav>
+    <a href="#about" class="nav-link">About</a>
+    <a href="#skills" class="nav-link">Skills</a>
+    <a href="#projects" class="nav-link">Projects</a>
+    <a href="#contact" class="nav-link">Contact</a>
+  </nav>
+
+  <header>
+    <div class="profile-container">
+      <img src="https://dev-inastagram.pantheonsite.io/wp-content/uploads/2025/05/file_00000000397c61f4a07ad59606b452be-1.png" alt="Muhammad Abu Al-Saud" class="profile-img">
+    </div>
+    <h1 class="holographic-title">Muhammad Abu Al-Saud</h1>
+    <div class="contact-icons">
+      <a href="https://t.me/A_Y_TR" target="_blank"><i class="fab fa-telegram contact-icon"></i></a>
+      <a href="https://wa.me/+994403179714" target="_blank"><i class="fab fa-whatsapp contact-icon"></i></a>
+      <a href="https://tiktok.com/@a_y_tr" target="_blank"><i class="fab fa-tiktok contact-icon"></i></a>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="card">
+      <h2>About Me</h2>
+      <p>Certified Cybersecurity ..🌐🖥
+      Expert specializing in digital protection systems and network security...Kiyada is an exceptional figure in the world of cybersecurity and development, blending intellectual strength with strategic thinking. Her journey in this field started at a young age, from simple attempts to hack networks to becoming one of the leading experts in the field. Her passion for technology and programming led her to develop advanced tools for data extraction and vulnerability analysis, making her a prominent name among professionals.
+
+As her skills evolved, Kiyada became capable of building complex cybersecurity systems, including techniques like network hacking, signal analysis, and AI-powered vulnerability mapping. She led innovative projects such as the DF tool, one of the most powerful solutions for data collection and integrated cybersecurity solutions. She ensured that these tools were user-friendly, reflecting her deep understanding of the technical community’s needs.
+
+In addition to her technical work, Kiyada is a leader in building strong tech teams. She focuses on developing both new and seasoned members to reach high levels of competency. She believes that success in cybersecurity requires continuous innovation and teamwork, a philosophy she translates into her projects and tools.
+
+Through her projects, Kiyada aims to change the way people think about cybersecurity, offering creative solutions that enhance online security. Her ambitions go beyond modern technologies, as she also seeks to educate others and raise technical awareness on platforms like TikTok and Telegram, where she shares her knowledge and inspires others to join the field.
+
+Kiyada never stops striving for self-improvement. She continues to face challenges and criticisms that come her way, never allowing anything to hinder her progress. She is always ready to lend a helping hand to her technical community, believing that success is the fruit of persistence.
+
+Every step she takes is a step towards leaving a clear mark on the world of technology, and she strives with all her strength to become one of the pioneers reshaping this field...آلقيـــــــــــــــآدهہ‌‏ آلزعيـــم</p>
+    </div>
+  </section>
+
+<section id="skills">
+    <div class="card">
+        <h2>Technical Skills</h2>
+        <div class="hack-grid">
+            <div class="hack-item">
+                <h3>Ethical Hacking</h3>
+                <p>Network/device hacking & vulnerability discovery</p>
+            </div>
+            <div class="hack-item">
+                <h3>Programming & Development</h3>
+                <p>Cybersecurity tools & Telegram bots development</p>
+            </div>
+            <div class="hack-item">
+                <h3>Advanced Cyber Attacks</h3>
+                <p>Evil Twin, Deauthentication, Session Hijacking</p>
+            </div>
+            <div class="hack-item">
+                <h3>AI & Vulnerability Analysis</h3>
+                <p>AI-powered security vulnerability detection</p>
+            </div>
+            <div class="hack-item">
+                <h3>Integrated Cyber Tools</h3>
+                <p>Data extraction & security analysis systems</p>
+            </div>
+            <div class="hack-item">
+                <h3>Signal Analysis</h3>
+                <p>WiFi/Bluetooth/RFID/NFC hacking</p>
+            </div>
+            <div class="hack-item">
+                <h3>Tech Team Management</h3>
+                <p>Building & developing cybersecurity teams</p>
+            </div>
+            <div class="hack-item">
+                <h3>Security Education</h3>
+                <p>Cybersecurity awareness through social platforms</p>
+            </div>
+            <div class="hack-item">
+                <h3>Strategic Leadership</h3>
+                <p>Leading innovative security projects</p>
+            </div>
+            <div class="hack-item">
+                <h3>Self-Development</h3>
+                <p>Continuous learning & challenge tackling</p>
+            </div>
+            <div class="hack-item">
+                <h3>Device Hacking</h3>
+                <p>Computer/mobile device exploitation</p>
+            </div>
+            <div class="hack-item">
+                <h3>Phishing Techniques</h3>
+                <p>Advanced phishing & credential guessing</p>
+            </div>
+            <div class="hack-item">
+                <h3>Network Analysis</h3>
+                <p>Network vulnerability assessment</p>
+            </div>
+            <div class="hack-item">
+                <h3>Surveillance Systems</h3>
+                <p>CCTV & security camera hacking</p>
+            </div>
+            <div class="hack-item">
+                <h3>Vulnerability Research</h3>
+                <p>System/software flaw discovery</p>
+            </div>
+            <div class="hack-item">
+                <h3>Malware Analysis</h3>
+                <p>Malicious software reverse engineering</p>
+            </div>
+            <div class="hack-item">
+                <h3>Vulnerability Management</h3>
+                <p>System scanning & patching prioritization</p>
+            </div>
+            <div class="hack-item">
+                <h3>Digital Forensics</h3>
+                <p>Evidence collection & data recovery</p>
+            </div>
+            <div class="hack-item">
+                <h3>Traffic Analysis</h3>
+                <p>Network anomaly detection</p>
+            </div>
+            <div class="hack-item">
+                <h3>DDoS Operations</h3>
+                <p>Attack execution & mitigation</p>
+            </div>
+            <div class="hack-item">
+                <h3>ICS Security</h3>
+                <p>SCADA system penetration testing</p>
+            </div>
+            <div class="hack-item">
+                <h3>Cryptography</h3>
+                <p>Data encryption/decryption techniques</p>
+            </div>
+            <div class="hack-item">
+                <h3>Social Engineering</h3>
+                <p>Human factor exploitation</p>
+            </div>
+            <div class="hack-item">
+                <h3>Behavior Analytics</h3>
+                <p>User activity monitoring</p>
+            </div>
+            <div class="hack-item">
+                <h3>0-Day Exploits</h3>
+                <p>Undisclosed vulnerability exploitation</p>
+            </div>
+            <div class="hack-item">
+                <h3>System Hardening</h3>
+                <p>Security configuration optimization</p>
+            </div>
+            <div class="hack-item">
+                <h3>App Security</h3>
+                <p>Software vulnerability assessment</p>
+            </div>
+            <div class="hack-item">
+                <h3>Penetration Testing</h3>
+                <p>Full-system security audits</p>
+            </div>
+            <div class="hack-item">
+                <h3>Cloud Security</h3>
+                <p>Cloud infrastructure protection</p>
+            </div>
+            <div class="hack-item">
+                <h3>Wireless Security</h3>
+                <p>WiFi network penetration</p>
+            </div>
+            <div class="hack-item">
+                <h3>IoT Security</h3>
+                <p>Smart device exploitation</p>
+            </div>
+            <div class="hack-item">
+                <h3>SIEM Management</h3>
+                <p>Splunk/ELK Stack implementation</p>
+            </div>
+            <div class="hack-item">
+                <h3>MitM Attacks</h3>
+                <p>Data interception techniques</p>
+            </div>
+            <div class="hack-item">
+                <h3>Web Exploitation</h3>
+                <p>SQLi/XSS/CSRF attacks</p>
+            </div>
+            <div class="hack-item">
+                <h3>File Analysis</h3>
+                <p>System file integrity checking</p>
+            </div>
+            <div class="hack-item">
+                <h3>Threat Defense</h3>
+                <p>Advanced attack prevention systems</p>
+            </div>
+            <div class="hack-item">
+                <h3>Mobile Security</h3>
+                <p>Android/iOS vulnerability research</p>
+            </div>
+            <div class="hack-item">
+                <h3>OS Tools</h3>
+                <p>Kali Linux/Metasploit expertise</p>
+            </div>
+            <div class="hack-item">
+                <h3>Database Security</h3>
+                <p>SQL/NoSQL system penetration</p>
+            </div>
+            <div class="hack-item">
+                <h3>Cloud Penetration</h3>
+                <p>AWS/GCP security testing</p>
+            </div>
+            <div class="hack-item">
+                <h3>Blockchain Security</h3>
+                <p>Cryptocurrency system analysis</p>
+            </div>
+            <div class="hack-item">
+                <h3>Anti-Extortion</h3>
+                <p>Cybercrime countermeasures</p>
+            </div>
+            <div class="hack-item">
+                <h3>Threat Intelligence</h3>
+                <p>Cybersecurity trend analysis</p>
+            </div>
+            <div class="hack-item">
+                <h3>Defensive Systems</h3>
+                <p>WAF/IPS/IDS implementation</p>
+            </div>
+            <div class="hack-item">
+                <h3>Disaster Recovery</h3>
+                <p>Post-attack system restoration</p>
+            </div>
+            <div class="hack-item">
+                <h3>Red Teaming</h3>
+                <p>Offensive security environments</p>
+            </div>
+            <div class="hack-item">
+                <h3>Attack Mitigation</h3>
+                <p>DDoS/Brute Force protection</p>
+            </div>
+            <div class="hack-item">
+                <h3>Emerging Tech Security</h3>
+                <p>AI/Blockchain/Robotics protection</p>
+            </div>
+            <div class="hack-item">
+                <h3>OSINT Analysis</h3>
+                <p>Shodan/Censys utilization</p>
+            </div>
+            <div class="hack-item">
+                <h3>APT Defense</h3>
+                <p>Advanced Persistent Threat management</p>
+            </div>
+            <div class="hack-item">
+                <h3>AI Development</h3>
+                <p>Intelligent security systems creation</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <section id="projects">
+    <div class="card">
+      <h2>Featured Projects</h2>
+      <div class="hack-grid">
+        <div class="hack-item">
+          <i class="fas fa-lock fa-2x"></i>
+          <h3>SecureNet Pro</h3>
+          <p>Enterprise-level network security solution</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-robot fa-2x"></i>
+          <h3>Cyber Sentinel AI</h3>
+          <p>AI threat detection system</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="card">
+      <h2>Contact Me</h2>
+      <div class="hack-grid">
+        <div class="hack-item">
+          <i class="fab fa-telegram fa-2x"></i>
+          <h3>Telegram</h3>
+          <p>@A_Y_TR</p>
+        </div>
+        <div class="hack-item">
+          <i class="fab fa-whatsapp fa-2x"></i>
+          <h3>WhatsApp</h3>
+          <p>+994403179714</p>
+        </div>
+        <div class="hack-item">
+          <i class="fab fa-tiktok fa-2x"></i>
+          <h3>TikTok</h3>
+          <p>@a_y_tr</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 Muhammad Abu Al-Saud. All rights reserved. القيادة الزعيم</p>
+  </footer>
+
+  <script>
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+
+    const cards = document.querySelectorAll('.card');
+    cards.forEach((card, index) => {
+      card.style.opacity = '0';
+      card.style.transform = 'translateY(20px)';
+      card.style.transition = `all 0.5s ease ${index * 0.2}s`;
+    });
+
+    window.addEventListener('load', () => {
+      cards.forEach(card => {
+        card.style.opacity = '1';
+        card.style.transform = 'translateY(0)';
+      });
+    });
+  </script>
+</body>
+</html>
