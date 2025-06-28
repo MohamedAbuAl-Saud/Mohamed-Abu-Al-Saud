@@ -1,20 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Muhammad Abu Al-Saud | Cybersecurity Expert</title>
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <title>القيادة - خبير الأمن السيبراني</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
       --primary: #0a0f1f;
       --secondary: #12c2e9;
       --accent: #c471ed;
+      --accent-alt: #f64f59;
       --text: #e5e7eb;
+      --text-alt: #a0aec0;
       --bg: #0f172a;
       --bg-alt: #1e293b;
+      --bg-card: rgba(30, 41, 59, 0.7);
       --border-color: rgba(255,255,255,0.1);
+      --glow: 0 0 15px rgba(18, 194, 233, 0.5);
+      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
 
     * {
@@ -31,53 +36,175 @@
       font-family: 'Tajawal', sans-serif;
       background: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.7;
       overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(18, 194, 233, 0.05) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, rgba(196, 113, 237, 0.05) 0%, transparent 20%),
+        linear-gradient(to bottom, var(--primary), var(--bg));
+      background-attachment: fixed;
     }
 
-    .animated-bg {
+    .cyber-grid {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: 
+        linear-gradient(rgba(18, 194, 233, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(18, 194, 233, 0.05) 1px, transparent 1px);
+      background-size: 40px 40px;
+      z-index: -2;
+      opacity: 0.3;
+    }
+
+    .particles {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
       z-index: -1;
-      background: linear-gradient(45deg, #0a0f1f, #0f172a);
-      animation: bg-pulse 20s infinite;
+      overflow: hidden;
     }
 
-    @keyframes bg-pulse {
-      0% { opacity: 0.8; }
-      50% { opacity: 0.6; }
-      100% { opacity: 0.8; }
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      background: var(--secondary);
+      opacity: 0.3;
+      animation: float 15s infinite linear;
+    }
+
+    @keyframes float {
+      0% { transform: translateY(0) translateX(0); opacity: 0; }
+      10% { opacity: 0.3; }
+      90% { opacity: 0.1; }
+      100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
     }
 
     nav {
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 0.8rem 5%;
+      padding: 0.5rem 3%;
       backdrop-filter: blur(15px);
-      background: rgba(15,23,42,0.85);
+      background: rgba(15,23,42,0.7);
       display: flex;
       justify-content: center;
-      gap: 1.5rem;
+      gap: 1rem;
       z-index: 1000;
       border-bottom: 1px solid var(--border-color);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
     }
 
     .nav-link {
       color: var(--text);
-      padding: 0.6rem 1.2rem;
+      padding: 0.5rem 1rem;
       border-radius: 30px;
-      transition: 0.3s;
-      font-size: 1rem;
+      transition: var(--transition);
+      font-size: 0.85rem;
       text-decoration: none;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      position: relative;
+      overflow: hidden;
+      background: rgba(18, 194, 233, 0.1);
+    }
+
+    .nav-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(18,194,233,0.3), transparent);
+      transition: 0.6s;
+    }
+
+    .nav-link:hover::before {
+      left: 100%;
     }
 
     .nav-link:hover {
       background: linear-gradient(45deg, var(--secondary), var(--accent));
-      box-shadow: 0 0 10px rgba(18,194,233,0.3);
+      box-shadow: var(--glow);
+      transform: translateY(-3px);
+    }
+
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #0a0f1f, #0f172a);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+      transition: opacity 1s ease;
+    }
+
+    .splash-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      animation: flyIn 1s ease-out;
+    }
+
+    .splash-image {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--secondary);
+      box-shadow: var(--glow);
+      margin-bottom: 20px;
+    }
+
+    .splash-sign {
+      font-size: 2rem;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      padding: 10px 20px;
+      border-radius: 10px;
+      color: white;
+      font-weight: bold;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    }
+
+    @keyframes flyIn {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(0); }
+    }
+
+    .hacker-text {
+      position: absolute;
+      color: rgba(18, 194, 233, 0.7);
+      font-size: 1.2rem;
+      animation: floatText 15s linear infinite;
+      z-index: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.05); opacity: 0.9; }
+    }
+
+    @keyframes fadeIn {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+
+    @keyframes floatText {
+      0% { transform: translateY(100vh) translateX(0); }
+      100% { transform: translateY(-100px) translateX(calc(100vw - 100px)); }
     }
 
     header {
@@ -88,6 +215,19 @@
       justify-content: center;
       padding: 2rem;
       text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      max-width: 800px;
+      padding: 2rem;
+      background: rgba(10, 15, 31, 0.6);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      border: 1px solid rgba(18, 194, 233, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3), var(--glow);
     }
 
     .profile-container {
@@ -95,45 +235,105 @@
       height: 180px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 1rem 0;
-      border: 2px solid var(--secondary);
-      box-shadow: 0 0 20px rgba(18,194,233,0.2);
-      transition: 0.3s;
+      margin: 1rem auto;
+      border: 3px solid var(--secondary);
+      box-shadow: var(--glow);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    .profile-container::after {
+      content: '';
+      position: absolute;
+      top: -5px;
+      left: -5px;
+      right: -5px;
+      bottom: -5px;
+      border-radius: 50%;
+      background: linear-gradient(45deg, var(--secondary), var(--accent), var(--accent-alt));
+      z-index: -1;
+      animation: rotate 3s linear infinite;
+    }
+
+    @keyframes rotate {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     .profile-img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      filter: grayscale(20%) contrast(110%);
+      filter: grayscale(10%) contrast(110%);
+      transition: var(--transition);
+    }
+
+    .profile-container:hover .profile-img {
+      transform: scale(1.05);
+      filter: grayscale(0%) contrast(120%);
     }
 
     .holographic-title {
       font-size: 2.5rem;
-      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      background: linear-gradient(45deg, var(--secondary), var(--accent), var(--accent-alt));
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
       margin: 1rem 0;
-      text-shadow: 0 0 5px rgba(18,194,233,0.3);
+      text-shadow: 0 0 15px rgba(18,194,233,0.5);
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+    }
+
+    .holographic-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 150px;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--secondary), transparent);
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
+    .subtitle {
+      font-size: 1.3rem;
+      color: var(--text-alt);
+      margin-bottom: 2rem;
+      font-weight: 300;
     }
 
     .contact-icons {
       display: flex;
       gap: 1.5rem;
       margin-top: 2rem;
+      justify-content: center;
     }
 
     .contact-icon {
       font-size: 1.8rem;
       color: var(--text);
-      transition: 0.3s;
+      transition: var(--transition);
       animation: float 3s ease-in-out infinite;
+      background: rgba(18, 194, 233, 0.1);
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(18, 194, 233, 0.3);
     }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-5px); }
+    .contact-icon:hover {
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      box-shadow: var(--glow);
+      transform: translateY(-5px);
+      color: white;
     }
 
     section {
@@ -144,34 +344,252 @@
       justify-content: center;
     }
 
+    .section-title {
+      font-size: 2rem;
+      margin-bottom: 2.5rem;
+      text-align: center;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-family: 'Orbitron', sans-serif;
+      letter-spacing: 1px;
+      position: relative;
+      display: inline-block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background: var(--secondary);
+      border-radius: 50%;
+      filter: blur(2px);
+    }
+
     .card {
-      background: var(--bg-alt);
+      background: var(--bg-card);
       padding: 2rem;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-      margin: 1rem 0;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+      margin: 1.2rem 0;
       backdrop-filter: blur(10px);
       border: 1px solid var(--border-color);
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 5px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--secondary), var(--accent));
+      transition: var(--transition);
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 15px 40px rgba(0,0,0,0.4), var(--glow);
+    }
+
+    .card:hover::before {
+      width: 7px;
     }
 
     .hack-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 1.5rem;
-      margin-top: 2rem;
+      margin-top: 1.5rem;
     }
 
     .hack-item {
       padding: 1.5rem;
       border: 1px solid var(--secondary);
-      border-radius: 10px;
+      border-radius: 15px;
       text-align: center;
-      transition: 0.3s;
+      transition: var(--transition);
+      background: rgba(18, 194, 233, 0.05);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hack-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--secondary), var(--accent));
+      transform: translateX(-100%);
+      transition: var(--transition);
     }
 
     .hack-item:hover {
+      transform: translateY(-7px);
+      box-shadow: 0 10px 25px rgba(18,194,233,0.3);
+      background: rgba(18, 194, 233, 0.1);
+    }
+
+    .hack-item:hover::before {
+      transform: translateX(0);
+    }
+
+    .hack-item i {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 1rem;
+    }
+
+    .hack-item h3 {
+      font-size: 1.2rem;
+      margin-bottom: 0.8rem;
+      color: var(--text);
+    }
+
+    .hack-item p {
+      color: var(--text-alt);
+      font-size: 0.9rem;
+    }
+
+    .service-form {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .form-group label {
+      color: var(--secondary);
+      font-weight: 500;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      padding: 0.9rem;
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      color: var(--text);
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      transition: var(--transition);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--secondary);
+      box-shadow: 0 0 10px rgba(18,194,233,0.3);
+    }
+
+    .submit-btn {
+      padding: 0.9rem;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      border: none;
+      border-radius: 10px;
+      color: white;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(18,194,233,0.3);
+    }
+
+    .submit-btn:hover {
       transform: translateY(-5px);
-      box-shadow: 0 0 15px var(--secondary);
+      box-shadow: 0 10px 25px rgba(18,194,233,0.5);
+      background: linear-gradient(45deg, var(--accent), var(--secondary));
+    }
+
+    .payment-methods {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.8rem;
+    }
+
+    .payment-method {
+      padding: 1.3rem;
+      background: rgba(30, 41, 59, 0.5);
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+      text-align: center;
+      transition: var(--transition);
+    }
+
+    .payment-method:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(18,194,233,0.2);
+      border-color: var(--secondary);
+    }
+
+    .payment-method i {
+      font-size: 2.2rem;
+      color: var(--secondary);
+      margin-bottom: 0.8rem;
+    }
+
+    .payment-method h3 {
+      margin-bottom: 0.8rem;
+      color: var(--text);
+      font-size: 1.2rem;
+    }
+
+    .payment-address {
+      background: rgba(18, 194, 233, 0.1);
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-family: monospace;
+      word-break: break-all;
+      font-size: 0.85rem;
+      margin-top: 0.8rem;
+      transition: var(--transition);
+      cursor: pointer;
+      position: relative;
+    }
+
+    .payment-address:hover {
+      background: rgba(18, 194, 233, 0.2);
+      transform: translateY(-3px);
+    }
+
+    .copy-notification {
+      position: absolute;
+      top: -35px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--secondary);
+      color: white;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 0.8rem;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .copy-notification.show {
+      opacity: 1;
     }
 
     footer {
@@ -179,21 +597,97 @@
       padding: 2rem;
       background: var(--bg-alt);
       border-top: 1px solid var(--border-color);
+      position: relative;
+      font-size: 0.9rem;
     }
 
-    @media (max-width: 768px) {
+    .leader-statement {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      color: var(--secondary);
+      font-weight: 700;
+      text-shadow: 0 0 10px rgba(18,194,233,0.5);
+    }
+
+    .leader-statement::before, .leader-statement::after {
+      content: "✧";
+      margin: 0 8px;
+      color: var(--accent);
+    }
+
+    .phone-number {
+      font-size: 0.8rem;
+      margin-top: 1rem;
+      color: var(--text-alt);
+    }
+
+    .scroll-top {
+      position: fixed;
+      bottom: 25px;
+      right: 25px;
+      width: 45px;
+      height: 45px;
+      background: linear-gradient(45deg, var(--secondary), var(--accent));
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 100;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: var(--transition);
+      box-shadow: 0 5px 15px rgba(18,194,233,0.5);
+    }
+
+    .scroll-top.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .scroll-top:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(18,194,233,0.7);
+    }
+
+    @media (max-width: 992px) {
+      .holographic-title {
+        font-size: 2.2rem;
+      }
+      
+      .section-title {
+        font-size: 1.8rem;
+      }
+      
       nav {
-        padding: 0.5rem;
-        gap: 1rem;
+        gap: 0.7rem;
+        padding: 0.7rem;
       }
       
       .nav-link {
-        padding: 0.5rem 1rem;
-        font-size: 0.9rem;
+        padding: 0.5rem 0.9rem;
+        font-size: 0.85rem;
+      }
+
+      .splash-sign {
+        font-size: 1.8rem;
+      }
+
+      .splash-image {
+        width: 130px;
+        height: 130px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .holographic-title {
+        font-size: 1.9rem;
       }
       
-      .holographic-title {
-        font-size: 2rem;
+      .subtitle {
+        font-size: 1.1rem;
       }
       
       .profile-container {
@@ -202,309 +696,513 @@
       }
       
       section {
-        padding: 2rem 5%;
+        padding: 2.5rem 5%;
+      }
+      
+      .contact-icons {
+        gap: 1rem;
+      }
+      
+      .contact-icon {
+        width: 45px;
+        height: 45px;
+        font-size: 1.4rem;
+      }
+      
+      .card {
+        padding: 1.6rem;
+      }
+
+      .splash-sign {
+        font-size: 1.5rem;
+        padding: 8px 15px;
+      }
+
+      .splash-image {
+        width: 110px;
+        height: 110px;
+      }
+    }
+
+    @media (max-width: 576px) {
+      .holographic-title {
+        font-size: 1.7rem;
+      }
+      
+      .section-title {
+        font-size: 1.5rem;
+      }
+      
+      nav {
+        flex-wrap: wrap;
+        padding: 0.6rem;
+      }
+      
+      .nav-link {
+        padding: 0.5rem 0.8rem;
+        font-size: 0.8rem;
+        margin: 0.2rem;
+      }
+      
+      .hack-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .profile-container {
+        width: 130px;
+        height: 130px;
+      }
+
+      .splash-sign {
+        font-size: 1.2rem;
+      }
+
+      .splash-image {
+        width: 100px;
+        height: 100px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="animated-bg"></div>
+  <div class="cyber-grid"></div>
+  <div class="particles" id="particles"></div>
+
+  <!-- شاشة الافتتاحية مع صورة الهكر -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-content">
+      <img src="https://dev-inastagram.pantheonsite.io/wp-content/uploads/2025/05/file_00000000397c61f4a07ad59606b452be-1.png" alt="Hacker" class="splash-image">
+      <div class="splash-sign">مرحبًا بموقع القيـــاده</div>
+    </div>
+  </div>
 
   <nav>
-    <a href="#about" class="nav-link">About</a>
-    <a href="#skills" class="nav-link">Skills</a>
-    <a href="#projects" class="nav-link">Projects</a>
-    <a href="#contact" class="nav-link">Contact</a>
+    <a href="#about" class="nav-link">نبذة عني</a>
+    <a href="#skills" class="nav-link">المهارات</a>
+    <a href="#projects" class="nav-link">المشاريع</a>
+    <a href="#contact" class="nav-link">اتصل بي</a>
+    <a href="#donate" class="nav-link">دعم القيادة</a>
+    <a href="#service" class="nav-link">طلب خدمة</a>
   </nav>
 
   <header>
-    <div class="profile-container">
-      <img src="https://dev-inastagram.pantheonsite.io/wp-content/uploads/2025/05/file_00000000397c61f4a07ad59606b452be-1.png" alt="Muhammad Abu Al-Saud" class="profile-img">
-    </div>
-    <h1 class="holographic-title">Muhammad Abu Al-Saud</h1>
-    <div class="contact-icons">
-      <a href="https://t.me/A_Y_TR" target="_blank"><i class="fab fa-telegram contact-icon"></i></a>
-      <a href="https://wa.me/+994403179714" target="_blank"><i class="fab fa-whatsapp contact-icon"></i></a>
-      <a href="https://tiktok.com/@a_y_tr" target="_blank"><i class="fab fa-tiktok contact-icon"></i></a>
+    <div class="hero-content">
+      <div class="profile-container">
+        <img src="https://dev-inastagram.pantheonsite.io/wp-content/uploads/2025/05/file_00000000397c61f4a07ad59606b452be-1.png" alt="القيادة" class="profile-img">
+      </div>
+      <h1 class="holographic-title">القيادة</h1>
+      <p class="subtitle">خبير الأمن السيبراني والهاكر الأخلاقي</p>
+      <div class="contact-icons">
+        <a href="https://t.me/A_Y_TR" target="_blank"><i class="fab fa-telegram contact-icon"></i></a>
+        <a href="https://wa.me/+251970384031" target="_blank"><i class="fab fa-whatsapp contact-icon"></i></a>
+        <a href="https://www.tiktok.com/@example" target="_blank"><i class="fab fa-tiktok contact-icon"></i></a>
+      </div>
     </div>
   </header>
 
   <section id="about">
+    <h2 class="section-title">نبذة عني</h2>
     <div class="card">
-      <h2>About Me</h2>
-      <p>Certified Cybersecurity ..🌐🖥
-      Expert specializing in digital protection systems and network security...Kiyada is an exceptional figure in the world of cybersecurity and development, blending intellectual strength with strategic thinking. Her journey in this field started at a young age, from simple attempts to hack networks to becoming one of the leading experts in the field. Her passion for technology and programming led her to develop advanced tools for data extraction and vulnerability analysis, making her a prominent name among professionals.
-
-As her skills evolved, Kiyada became capable of building complex cybersecurity systems, including techniques like network hacking, signal analysis, and AI-powered vulnerability mapping. She led innovative projects such as the DF tool, one of the most powerful solutions for data collection and integrated cybersecurity solutions. She ensured that these tools were user-friendly, reflecting her deep understanding of the technical community’s needs.
-
-In addition to her technical work, Kiyada is a leader in building strong tech teams. She focuses on developing both new and seasoned members to reach high levels of competency. She believes that success in cybersecurity requires continuous innovation and teamwork, a philosophy she translates into her projects and tools.
-
-Through her projects, Kiyada aims to change the way people think about cybersecurity, offering creative solutions that enhance online security. Her ambitions go beyond modern technologies, as she also seeks to educate others and raise technical awareness on platforms like TikTok and Telegram, where she shares her knowledge and inspires others to join the field.
-
-Kiyada never stops striving for self-improvement. She continues to face challenges and criticisms that come her way, never allowing anything to hinder her progress. She is always ready to lend a helping hand to her technical community, believing that success is the fruit of persistence.
-
-Every step she takes is a step towards leaving a clear mark on the world of technology, and she strives with all her strength to become one of the pioneers reshaping this field...آلقيـــــــــــــــآدهہ‌‏ آلزعيـــم</p>
+      <p>خبير معتمد في الأمن السيبراني 🌐🖥 متخصص في أنظمة الحماية الرقمية وأمن الشبكات. القيادة شخصية استثنائية في عالم الأمن السيبراني والبرمجة، يجمع بين القوة الفكرية والتفكير الاستراتيجي. بدأت رحلته في هذا المجال في سن مبكرة، بدءًا من محاولات اختراق بسيطة للشبكات ليصبح أحد الخبراء الرائدين في المجال. قاده شغفه بالتكنولوجيا والبرمجة إلى تطوير أدوات متقدمة لاستخراج البيانات وتحليل الثغرات، مما جعله اسمًا بارزًا بين المحترفين.</p>
+      
+      <p>مع تطور مهاراته، أصبح القيادة قادرًا على بناء أنظمة أمن سيبراني معقدة، تشمل تقنيات مثل اختراق الشبكات، وتحليل الإشارات، ورسم الثغرات الأمنية المدعومة بالذكاء الاصطناعي. قاد مشاريع مبتكرة مثل أداة DF، إحدى أقوى الحلول لجمع البيانات والحلول المتكاملة للأمن السيبراني. حرص على أن تكون هذه الأدوات سهلة الاستخدام، مما يعكس فهمه العميق لاحتياجات المجتمع التقني.</p>
+      
+      <p>بالإضافة إلى عمله التقني، يعمل القيادة كقائد في بناء فرق تقنية قوية. يركز على تطوير الأعضاء الجدد والقدامى للوصول إلى مستويات عالية من الكفاءة. يؤمن أن النجاح في مجال الأمن السيبراني يتطلب الابتكار المستمر والعمل الجماعي، وهي فلسفة يترجمها في مشاريعه وأدواته.</p>
+      
+      <p class="leader-statement">القيـــــــــــــــآدهہ‌‏ آلزعيـــم</p>
     </div>
   </section>
 
-<section id="skills">
+  <section id="skills">
+    <h2 class="section-title">خبراتي التقنية</h2>
     <div class="card">
-        <h2>Technical Skills</h2>
-        <div class="hack-grid">
-            <div class="hack-item">
-                <h3>Ethical Hacking</h3>
-                <p>Network/device hacking & vulnerability discovery</p>
-            </div>
-            <div class="hack-item">
-                <h3>Programming & Development</h3>
-                <p>Cybersecurity tools & Telegram bots development</p>
-            </div>
-            <div class="hack-item">
-                <h3>Advanced Cyber Attacks</h3>
-                <p>Evil Twin, Deauthentication, Session Hijacking</p>
-            </div>
-            <div class="hack-item">
-                <h3>AI & Vulnerability Analysis</h3>
-                <p>AI-powered security vulnerability detection</p>
-            </div>
-            <div class="hack-item">
-                <h3>Integrated Cyber Tools</h3>
-                <p>Data extraction & security analysis systems</p>
-            </div>
-            <div class="hack-item">
-                <h3>Signal Analysis</h3>
-                <p>WiFi/Bluetooth/RFID/NFC hacking</p>
-            </div>
-            <div class="hack-item">
-                <h3>Tech Team Management</h3>
-                <p>Building & developing cybersecurity teams</p>
-            </div>
-            <div class="hack-item">
-                <h3>Security Education</h3>
-                <p>Cybersecurity awareness through social platforms</p>
-            </div>
-            <div class="hack-item">
-                <h3>Strategic Leadership</h3>
-                <p>Leading innovative security projects</p>
-            </div>
-            <div class="hack-item">
-                <h3>Self-Development</h3>
-                <p>Continuous learning & challenge tackling</p>
-            </div>
-            <div class="hack-item">
-                <h3>Device Hacking</h3>
-                <p>Computer/mobile device exploitation</p>
-            </div>
-            <div class="hack-item">
-                <h3>Phishing Techniques</h3>
-                <p>Advanced phishing & credential guessing</p>
-            </div>
-            <div class="hack-item">
-                <h3>Network Analysis</h3>
-                <p>Network vulnerability assessment</p>
-            </div>
-            <div class="hack-item">
-                <h3>Surveillance Systems</h3>
-                <p>CCTV & security camera hacking</p>
-            </div>
-            <div class="hack-item">
-                <h3>Vulnerability Research</h3>
-                <p>System/software flaw discovery</p>
-            </div>
-            <div class="hack-item">
-                <h3>Malware Analysis</h3>
-                <p>Malicious software reverse engineering</p>
-            </div>
-            <div class="hack-item">
-                <h3>Vulnerability Management</h3>
-                <p>System scanning & patching prioritization</p>
-            </div>
-            <div class="hack-item">
-                <h3>Digital Forensics</h3>
-                <p>Evidence collection & data recovery</p>
-            </div>
-            <div class="hack-item">
-                <h3>Traffic Analysis</h3>
-                <p>Network anomaly detection</p>
-            </div>
-            <div class="hack-item">
-                <h3>DDoS Operations</h3>
-                <p>Attack execution & mitigation</p>
-            </div>
-            <div class="hack-item">
-                <h3>ICS Security</h3>
-                <p>SCADA system penetration testing</p>
-            </div>
-            <div class="hack-item">
-                <h3>Cryptography</h3>
-                <p>Data encryption/decryption techniques</p>
-            </div>
-            <div class="hack-item">
-                <h3>Social Engineering</h3>
-                <p>Human factor exploitation</p>
-            </div>
-            <div class="hack-item">
-                <h3>Behavior Analytics</h3>
-                <p>User activity monitoring</p>
-            </div>
-            <div class="hack-item">
-                <h3>0-Day Exploits</h3>
-                <p>Undisclosed vulnerability exploitation</p>
-            </div>
-            <div class="hack-item">
-                <h3>System Hardening</h3>
-                <p>Security configuration optimization</p>
-            </div>
-            <div class="hack-item">
-                <h3>App Security</h3>
-                <p>Software vulnerability assessment</p>
-            </div>
-            <div class="hack-item">
-                <h3>Penetration Testing</h3>
-                <p>Full-system security audits</p>
-            </div>
-            <div class="hack-item">
-                <h3>Cloud Security</h3>
-                <p>Cloud infrastructure protection</p>
-            </div>
-            <div class="hack-item">
-                <h3>Wireless Security</h3>
-                <p>WiFi network penetration</p>
-            </div>
-            <div class="hack-item">
-                <h3>IoT Security</h3>
-                <p>Smart device exploitation</p>
-            </div>
-            <div class="hack-item">
-                <h3>SIEM Management</h3>
-                <p>Splunk/ELK Stack implementation</p>
-            </div>
-            <div class="hack-item">
-                <h3>MitM Attacks</h3>
-                <p>Data interception techniques</p>
-            </div>
-            <div class="hack-item">
-                <h3>Web Exploitation</h3>
-                <p>SQLi/XSS/CSRF attacks</p>
-            </div>
-            <div class="hack-item">
-                <h3>File Analysis</h3>
-                <p>System file integrity checking</p>
-            </div>
-            <div class="hack-item">
-                <h3>Threat Defense</h3>
-                <p>Advanced attack prevention systems</p>
-            </div>
-            <div class="hack-item">
-                <h3>Mobile Security</h3>
-                <p>Android/iOS vulnerability research</p>
-            </div>
-            <div class="hack-item">
-                <h3>OS Tools</h3>
-                <p>Kali Linux/Metasploit expertise</p>
-            </div>
-            <div class="hack-item">
-                <h3>Database Security</h3>
-                <p>SQL/NoSQL system penetration</p>
-            </div>
-            <div class="hack-item">
-                <h3>Cloud Penetration</h3>
-                <p>AWS/GCP security testing</p>
-            </div>
-            <div class="hack-item">
-                <h3>Blockchain Security</h3>
-                <p>Cryptocurrency system analysis</p>
-            </div>
-            <div class="hack-item">
-                <h3>Anti-Extortion</h3>
-                <p>Cybercrime countermeasures</p>
-            </div>
-            <div class="hack-item">
-                <h3>Threat Intelligence</h3>
-                <p>Cybersecurity trend analysis</p>
-            </div>
-            <div class="hack-item">
-                <h3>Defensive Systems</h3>
-                <p>WAF/IPS/IDS implementation</p>
-            </div>
-            <div class="hack-item">
-                <h3>Disaster Recovery</h3>
-                <p>Post-attack system restoration</p>
-            </div>
-            <div class="hack-item">
-                <h3>Red Teaming</h3>
-                <p>Offensive security environments</p>
-            </div>
-            <div class="hack-item">
-                <h3>Attack Mitigation</h3>
-                <p>DDoS/Brute Force protection</p>
-            </div>
-            <div class="hack-item">
-                <h3>Emerging Tech Security</h3>
-                <p>AI/Blockchain/Robotics protection</p>
-            </div>
-            <div class="hack-item">
-                <h3>OSINT Analysis</h3>
-                <p>Shodan/Censys utilization</p>
-            </div>
-            <div class="hack-item">
-                <h3>APT Defense</h3>
-                <p>Advanced Persistent Threat management</p>
-            </div>
-            <div class="hack-item">
-                <h3>AI Development</h3>
-                <p>Intelligent security systems creation</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-  <section id="projects">
-    <div class="card">
-      <h2>Featured Projects</h2>
       <div class="hack-grid">
         <div class="hack-item">
-          <i class="fas fa-lock fa-2x"></i>
-          <h3>SecureNet Pro</h3>
-          <p>Enterprise-level network security solution</p>
+          <i class="fas fa-user-secret"></i>
+          <h3>الاختراق الأخلاقي</h3>
+          <p>اختراق الشبكات والأجهزة واكتشاف الثغرات</p>
         </div>
         <div class="hack-item">
-          <i class="fas fa-robot fa-2x"></i>
+          <i class="fas fa-code"></i>
+          <h3>البرمجة والتطوير</h3>
+          <p>أدوات الأمن السيبراني وتطوير بوتات التليجرام</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-broadcast-tower"></i>
+          <h3>تحليل الإشارات</h3>
+          <p>اختراق شبكات الواي فاي، البلوتوث، RFID، NFC</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-brain"></i>
+          <h3>أنظمة الذكاء الاصطناعي</h3>
+          <p>كشف الثغرات باستخدام الذكاء الاصطناعي</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-toolbox"></i>
+          <h3>الأدوات المتكاملة</h3>
+          <p>أنظمة استخراج البيانات وتحليل الأمن</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-users"></i>
+          <h3>القيادة الفنية</h3>
+          <p>بناء وتطوير فرق الأمن السيبراني</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-shield-alt"></i>
+          <h3>الدفاع ضد التهديدات</h3>
+          <p>أنظمة متقدمة لمنع الهجمات</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-cloud"></i>
+          <h3>أمن السحابة</h3>
+          <p>اختبار أمن AWS وGCP</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-mobile-alt"></i>
+          <h3>أمن الجوال</h3>
+          <p>بحث ثغرات أندرويد وآيفون</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-lock"></i>
+          <h3>التشفير</h3>
+          <p>تقنيات تشفير وفك تشفير البيانات</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-search"></i>
+          <h3>الاستخبارات المفتوحة</h3>
+          <p>استخدام Shodan وCensys</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-shield-virus"></i>
+          <h3>التهديدات المتقدمة</h3>
+          <p>إدارة التهديدات المستمرة (APT)</p>
+        </div>
+        <!-- مهارات إضافية -->
+        <div class="hack-item">
+          <i class="fab fa-android"></i>
+          <h3>اختراق أندرويد</h3>
+          <p>اختراق وتجاوز حماية أجهزة أندرويد</p>
+        </div>
+        <div class="hack-item">
+          <i class="fab fa-apple"></i>
+          <h3>اختراق iOS</h3>
+          <p>اختراق وتجاوز حماية أجهزة آيفون</p>
+        </div>
+        <div class="hack-item">
+          <i class="fab fa-windows"></i>
+          <h3>اختراق ويندوز</h3>
+          <p>اختراق أنظمة تشغيل ويندوز</p>
+        </div>
+        <div class="hack-item">
+          <i class="fab fa-linux"></i>
+          <h3>اختراق لينكس</h3>
+          <p>اختراق أنظمة تشغيل لينكس</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-server"></i>
+          <h3>اختراق المواقع والسيرفرات</h3>
+          <p>اختراق المواقع الإلكترونية والخوادم</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-video"></i>
+          <h3>اختراق كاميرات المراقبة</h3>
+          <p>اختراق كاميرات المراقبة عن بعد</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-fish"></i>
+          <h3>التصيد الاحتيالي</h3>
+          <p>هجمات التصيد الاحتيالي المتقدمة</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-ban"></i>
+          <h3>حظر حسابات السوشيال ميديا</h3>
+          <p>حسابات فيسبوك، إنستغرام، تويتر</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-bug"></i>
+          <h3>استغلال الويب</h3>
+          <p>استغلال ثغرات الويب المختلفة</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-robot"></i>
+          <h3>أدوات وبوتات</h3>
+          <p>تصميم أدوات وبوتات القرصنة</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <h2 class="section-title">مشاريعي البارزة</h2>
+    <div class="card">
+      <div class="hack-grid">
+        <div class="hack-item">
+          <i class="fas fa-lock"></i>
+          <h3>SecureNet Pro</h3>
+          <p>حل أمن شبكات على مستوى المؤسسات</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-robot"></i>
           <h3>Cyber Sentinel AI</h3>
-          <p>AI threat detection system</p>
+          <p>نظام كشف التهديدات بالذكاء الاصطناعي</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-bug"></i>
+          <h3>VulnScan Pro</h3>
+          <p>ماسح ثغرات آلي متقدم</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-shield-virus"></i>
+          <h3>Guardian DF</h3>
+          <p>أدوات الطب الشرعي الرقمي المتقدمة</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-network-wired"></i>
+          <h3>NetShield</h3>
+          <p>جدار حماية ذكي للشبكات</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-code-branch"></i>
+          <h3>CodeSecure</h3>
+          <p>تحليل شفرات لاكتشاف الثغرات</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-user-shield"></i>
+          <h3>IdentityGuard</h3>
+          <p>نظام حماية متقدم للهوية</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-database"></i>
+          <h3>DataFortress</h3>
+          <p>حماية قواعد البيانات من الاختراق</p>
+        </div>
+        <!-- مشاريع إضافية -->
+        <div class="hack-item">
+          <i class="fas fa-video"></i>
+          <h3>CamSecure</h3>
+          <p>أداة اختراق كاميرات المراقبة</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-fish"></i>
+          <h3>PhishShield</h3>
+          <p>كشف وحماية من التصيد الاحتيالي</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-ban"></i>
+          <h3>AccountTerminator</h3>
+          <p>حظر حسابات السوشيال ميديا</p>
+        </div>
+        <div class="hack-item">
+          <i class="fas fa-tools"></i>
+          <h3>ExploitMaster</h3>
+          <p>مجموعة أدوات استغلال الثغرات</p>
         </div>
       </div>
     </div>
   </section>
 
   <section id="contact">
+    <h2 class="section-title">اتصل بي</h2>
     <div class="card">
-      <h2>Contact Me</h2>
       <div class="hack-grid">
         <div class="hack-item">
-          <i class="fab fa-telegram fa-2x"></i>
-          <h3>Telegram</h3>
+          <i class="fab fa-telegram"></i>
+          <h3>تيليجرام</h3>
           <p>@A_Y_TR</p>
         </div>
         <div class="hack-item">
-          <i class="fab fa-whatsapp fa-2x"></i>
-          <h3>WhatsApp</h3>
-          <p>+994403179714</p>
+          <i class="fab fa-whatsapp"></i>
+          <h3>واتساب</h3>
+          <p>+251970384031</p>
         </div>
         <div class="hack-item">
-          <i class="fab fa-tiktok fa-2x"></i>
-          <h3>TikTok</h3>
+          <i class="fab fa-tiktok"></i>
+          <h3>تيك توك</h3>
           <p>@a_y_tr</p>
         </div>
       </div>
     </div>
   </section>
 
+  <section id="donate">
+    <h2 class="section-title">ادعم القيادة</h2>
+    <div class="card">
+      <p>دعمك يمكنني من مواصلة تطوير أدوات الأمن السيبراني المتطورة، ترقية أجهزتي، ومواجهة التحديات التقنية الجديدة. كل مساهمة تساعد في تعزيز دفاعاتنا الرقمية وتطوير مجال الأمن السيبراني.</p>
+      
+      <div class="payment-methods">
+        <div class="payment-method">
+          <i class="fab fa-btc"></i>
+          <h3>Bitcoin (BTC)</h3>
+          <div class="payment-address" id="btc-address">
+            1LsjZsCNpocykvzu6Rdtce9Y2vJcoeEje5
+            <div class="copy-notification">تم النسخ!</div>
+          </div>
+        </div>
+        
+        <div class="payment-method">
+          <i class="fas fa-coins"></i>
+          <h3>USDT (TON)</h3>
+          <div class="payment-address" id="usdt-address">
+            UQBTIuxfyn8PCSXlbM6DmY_iFc1ky5OHR
+            <div class="copy-notification">تم النسخ!</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="service">
+    <h2 class="section-title">طلب خدمة</h2>
+    <div class="card">
+      <p>هل تحتاج إلى خبرة في الأمن السيبراني؟ املأ النموذج أدناه وسأتصل بك لمناقشة متطلباتك. جميع المعلومات مشفرة وآمنة.</p>
+      
+      <form class="service-form" id="service-form">
+        <div class="form-group">
+          <label for="name">الاسم الكامل</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact">طريقة الاتصال</label>
+          <select id="contact" name="contact" required>
+            <option value="">اختر طريقة الاتصال المفضلة</option>
+            <option value="whatsapp">واتساب</option>
+            <option value="telegram">تيليجرام</option>
+            <option value="tiktok">تيك توك</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="contact-details">تفاصيل الاتصال</label>
+          <input type="text" id="contact-details" name="contact-details" required placeholder="رقم الهاتف أو معرف التليجرام">
+        </div>
+        
+        <div class="form-group">
+          <label for="service-type">نوع الخدمة</label>
+          <select id="service-type" name="service-type" required>
+            <option value="">اختر الخدمة المطلوبة</option>
+            <option value="consulting">استشارات أمنية</option>
+            <option value="pentesting">اختبار الاختراق</option>
+            <option value="training">تدريب أمني</option>
+            <option value="development">تطوير أدوات</option>
+            <option value="emergency">استجابة للطوارئ</option>
+            <option value="android">اختراق أندرويد</option>
+            <option value="ios">اختراق iOS</option>
+            <option value="windows">اختراق ويندوز</option>
+            <option value="linux">اختراق لينكس</option>
+            <option value="websites">اختراق المواقع</option>
+            <option value="cameras">اختراق كاميرات المراقبة</option>
+            <option value="phishing">تصيد احتيالي</option>
+            <option value="social">حظر حسابات سوشيال ميديا</option>
+            <option value="web-exploits">استغلال ثغرات الويب</option>
+            <option value="bots">تطوير بوتات وأدوات</option>
+            <option value="other">أخرى</option>
+          </select>
+        </div>
+        
+        <div class="form-group">
+          <label for="message">تفاصيل الخدمة</label>
+          <textarea id="message" name="message" rows="5" required placeholder="صف متطلباتك بالتفصيل"></textarea>
+        </div>
+        
+        <button type="submit" class="submit-btn">إرسال الطلب</button>
+      </form>
+    </div>
+  </section>
+
   <footer>
-    <p>© 2025 Muhammad Abu Al-Saud. All rights reserved. القيادة الزعيم</p>
+    <p class="leader-statement">© Mohamed Abu El-Soud – آلقيـــآدهہ‌‏ آلزعيــم-2025 </p>
+    <p class="phone-number"></p>
   </footer>
 
+  <div class="scroll-top" id="scroll-top">
+    <i class="fas fa-arrow-up"></i>
+  </div>
+
   <script>
+    // إنشاء جسيمات متحركة
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 30;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // حجم عشوائي
+        const size = Math.random() * 10 + 2;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // موقع عشوائي
+        particle.style.left = `${Math.random() * 100}%`;
+        particle.style.top = `${Math.random() * 100}%`;
+        
+        // تأخير عشوائي للحركة
+        particle.style.animationDelay = `${Math.random() * 15}s`;
+        
+        container.appendChild(particle);
+      }
+    }
+    
+    // إنشاء نصوص هكر متحركة
+    function createHackerText() {
+      const container = document.getElementById('splash-screen');
+      const texts = [
+        "ROOT ACCESS GRANTED",
+        "SECURITY BREACH DETECTED",
+        "ENCRYPTION ACTIVE",
+        "FIREWALL BYPASSED",
+        "ACCESSING MAINFRAME",
+        "INTRUSION DETECTION SYSTEM",
+        "PENETRATION TESTING",
+        "VULNERABILITY SCANNING",
+        "MALWARE ANALYSIS",
+        "CYBER DEFENSE ACTIVE",
+        "NETWORK PENETRATION",
+        "DATA EXFILTRATION",
+        "ZERO-DAY EXPLOIT",
+        "SECURITY PROTOCOL ENGAGED",
+        "ANTI-VIRUS BYPASS"
+      ];
+      
+      for (let i = 0; i < 30; i++) {
+        const text = document.createElement('div');
+        text.classList.add('hacker-text');
+        text.textContent = texts[Math.floor(Math.random() * texts.length)];
+        text.style.left = `${Math.random() * 100}%`;
+        text.style.animationDuration = `${Math.random() * 20 + 10}s`;
+        container.appendChild(text);
+      }
+    }
+    
+    // إخفاء شاشة الافتتاحية بعد 3 ثوانٍ
+    setTimeout(() => {
+      document.getElementById('splash-screen').style.opacity = '0';
+      setTimeout(() => {
+        document.getElementById('splash-screen').style.display = 'none';
+      }, 1000);
+    }, 3000);
+
+    // زر العودة للأعلى
+    const scrollTopBtn = document.getElementById('scroll-top');
+    
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        scrollTopBtn.classList.add('visible');
+      } else {
+        scrollTopBtn.classList.remove('visible');
+      }
+    });
+    
+    scrollTopBtn.addEventListener('click', () => {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    });
+    
+    // التنقل السلس
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         e.preventDefault();
@@ -513,20 +1211,87 @@ Every step she takes is a step towards leaving a clear mark on the world of tech
         });
       });
     });
-
-    const cards = document.querySelectorAll('.card');
-    cards.forEach((card, index) => {
+    
+    // رسوم متحركة للبطاقات عند التمرير
+    const cards = document.querySelectorAll('.card, .hack-item, .payment-method');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+    
+    cards.forEach(card => {
       card.style.opacity = '0';
       card.style.transform = 'translateY(20px)';
-      card.style.transition = `all 0.5s ease ${index * 0.2}s`;
+      card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+      observer.observe(card);
     });
-
-    window.addEventListener('load', () => {
-      cards.forEach(card => {
-        card.style.opacity = '1';
-        card.style.transform = 'translateY(0)';
+    
+    // إرسال نموذج الخدمة
+    const serviceForm = document.getElementById('service-form');
+    
+    serviceForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      // جمع بيانات النموذج
+      const formData = {
+        name: document.getElementById('name').value,
+        contactMethod: document.getElementById('contact').value,
+        contactDetails: document.getElementById('contact-details').value,
+        serviceType: document.getElementById('service-type').value,
+        message: document.getElementById('message').value
+      };
+      
+      // إنشاء رسالة للواتساب
+      const whatsappMessage = `طلب خدمة جديد:%0A%0A` +
+                              `الاسم: ${formData.name}%0A` +
+                              `طريقة الاتصال: ${formData.contactMethod}%0A` +
+                              `تفاصيل الاتصال: ${formData.contactDetails}%0A` +
+                              `نوع الخدمة: ${formData.serviceType}%0A%0A` +
+                              `الرسالة:%0A${formData.message}`;
+      
+      // فتح الواتساب مع الرسالة المعدة مسبقًا
+      window.open(`https://wa.me/+251970384031?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+      
+      // إعادة تعيين النموذج
+      serviceForm.reset();
+      
+      // عرض تأكيد
+      alert('تم إرسال طلبك بنجاح! سأتصل بك قريبًا.');
+    });
+    
+    // نسخ عناوين العملات الرقمية
+    const btcAddress = document.getElementById('btc-address');
+    const usdtAddress = document.getElementById('usdt-address');
+    
+    function copyToClipboard(element, text) {
+      const notification = element.querySelector('.copy-notification');
+      
+      navigator.clipboard.writeText(text).then(() => {
+        notification.classList.add('show');
+        setTimeout(() => {
+          notification.classList.remove('show');
+        }, 2000);
       });
+    }
+    
+    btcAddress.addEventListener('click', () => {
+      copyToClipboard(btcAddress, '1LsjZsCNpocykvzu6Rdtce9Y2vJcoeEje5');
     });
+    
+    usdtAddress.addEventListener('click', () => {
+      copyToClipboard(usdtAddress, 'UQBTIuxfyn8PCSXlbM6DmY_iFc1ky5OHR');
+    });
+    
+    // تهيئة الجسيمات والنصوص
+    createParticles();
+    createHackerText();
   </script>
 </body>
-</html>
+  </html>
